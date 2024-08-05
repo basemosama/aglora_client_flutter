@@ -4,7 +4,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 class BluetoothOffScreen extends StatelessWidget {
   const BluetoothOffScreen({Key? key, this.state}) : super(key: key);
 
-  final BluetoothState? state;
+  final BluetoothAdapterState? state;
 
   @override
   Widget build(BuildContext context) {

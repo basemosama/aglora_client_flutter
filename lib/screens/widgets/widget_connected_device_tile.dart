@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import '../../utils/bluetooth.dart';
+
 import '../screen_device.dart';
 
 class ConnectedDeviceTile extends StatelessWidget {
@@ -14,13 +14,13 @@ class ConnectedDeviceTile extends StatelessWidget {
       leading: Icon(
         Icons.gps_fixed,
       ),
-      title: Text(d.name),
+      title: Text(d.platformName),
       subtitle: Text('device connected'),
-      trailing: StreamBuilder<BluetoothDeviceState>(
-        stream: d.state,
-        initialData: BluetoothDeviceState.disconnected,
+      trailing: StreamBuilder<BluetoothConnectionState>(
+        stream: d.connectionState,
+        initialData: BluetoothConnectionState.disconnected,
         builder: (c, snapshot) {
-          if (snapshot.data == BluetoothDeviceState.connected) {
+          if (snapshot.data == BluetoothConnectionState.connected) {
             return ElevatedButton(
               child: Text('Open'),
               onPressed: () => Navigator.of(context)

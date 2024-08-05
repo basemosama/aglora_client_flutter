@@ -31,27 +31,27 @@ class DeviceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(device.name),
+          title: Text(device.platformName),
           actions: <Widget>[
-            StreamBuilder<BluetoothDeviceState>(
-              stream: device.state,
-              initialData: BluetoothDeviceState.connecting,
+            StreamBuilder<BluetoothConnectionState>(
+              stream: device.connectionState,
+              initialData: BluetoothConnectionState.connecting,
               builder: (c, snapshot) {
                 VoidCallback? onPressed;
                 String text;
                 switch (snapshot.data) {
-                  case BluetoothDeviceState.connecting:
+                  case BluetoothConnectionState.connecting:
                     text = 'waiting...';
                     break;
-                  case BluetoothDeviceState.disconnecting:
+                  case BluetoothConnectionState.disconnecting:
                     text = 'disconnecting...';
                     break;
-                  case BluetoothDeviceState.connected:
+                  case BluetoothConnectionState.connected:
                     onPressed = () => device.disconnect();
                     text = 'Disconnect';
                     device.discoverServices();
                     break;
-                  case BluetoothDeviceState.disconnected:
+                  case BluetoothConnectionState.disconnected:
                     onPressed = () => device.connect();
                     text = 'Connect';
                     break;
@@ -144,11 +144,11 @@ class bluetoothStatusIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<BluetoothDeviceState>(
+    return StreamBuilder<BluetoothConnectionState>(
       stream: device.state,
-      initialData: BluetoothDeviceState.connecting,
+      initialData: BluetoothConnectionState.connecting,
       builder: (c, snapshot) =>
-          (snapshot.data == BluetoothDeviceState.connected)
+          (snapshot.data == BluetoothConnectionState.connected)
               ? Icon(CupertinoIcons.bluetooth,
                   color: Colors.lightGreenAccent.shade100)
               : Icon(Icons.bluetooth_disabled, color: Colors.redAccent),

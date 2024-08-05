@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../../utils/compass.dart';
-import '../screen_map.dart';
+// import '../screen_map.dart';
 
 class LORAtrackerTile extends StatelessWidget {
   const LORAtrackerTile({
@@ -200,10 +200,11 @@ class LORAtrackerTile extends StatelessWidget {
                           OutlinedButton.icon(
                             onPressed: () => Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (context) {
-                              return MapScreen(
-                                centerLatitude: lat,
-                                centerLongitude: lon,
-                              );
+                              return Container();
+                              // return MapScreen(
+                              //   centerLatitude: lat,
+                              //   centerLongitude: lon,
+                              // );
                             })),
                             icon: Icon(
                               CupertinoIcons.map_pin_ellipse,

@@ -1,0 +1,39 @@
+name: aglora_client
+version: 0.0.1+1
+publish_to: none
+description: weXwa Marker - A new sourcya Flutter project.
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  cupertino_icons: ^1.0.8
+  flutter_blue_plus: ^1.32.11
+  flutter_compass: ^0.8.0
+  geolocator: ^12.0.0
+  flutter:
+    sdk: flutter
+
+
+
+dev_dependencies:
+  flutter_launcher_icons: "^0.13.1"
+  flutter_test:
+    sdk: flutter
+  lint: ^2.1.2
+
+
+flutter:
+  uses-material-design: true
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/icon/slogan.png"
+  min_sdk_android: 21
+  web:
+    generate: true
+  windows:
+    generate: true
+    icon_size: 48
+  macos:
+    generate: true
