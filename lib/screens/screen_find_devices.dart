@@ -1,9 +1,8 @@
+import 'package:aglora_client/screens/screen_device.dart';
 import 'package:aglora_client/screens/widgets/widget_scan_result_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
-import '../utils/bluetooth.dart';
-import 'screen_device.dart';
 import 'widgets/widget_connected_device_tile.dart';
 
 class FindDevicesScreen extends StatelessWidget {
@@ -39,9 +38,6 @@ class FindDevicesScreen extends StatelessWidget {
                           result: r,
                           onTap: () => Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            r.device.connect();
-                            r.device.discoverServices();
-                            startBluetoothListener(r.device);
                             return DeviceScreen(device: r.device);
                           })),
                         ),

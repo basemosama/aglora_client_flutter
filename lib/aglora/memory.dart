@@ -27,6 +27,7 @@ class Memory {
         final isSameTimes = (point.time == newPoint.time);
 
         // The most reliable way  :-)
+        //TODO(1): CHECK MEMORY
         if (isSameNames && isSameCoords && isSameTimes) {
           if (kDebugMode) print('MEMORY: Point already exists');
           isPointNew = false;

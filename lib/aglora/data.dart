@@ -5,6 +5,11 @@ class AGLoRaSensor {
 
   String name;
   String value;
+
+  @override
+  String toString() {
+    return 'AGLoRaSensor{name: $name, value: $value}';
+  }
 }
 
 class AGLORATrackerPoint {
@@ -21,6 +26,11 @@ class AGLORATrackerPoint {
   DateTime time;
 
   List<AGLoRaSensor>? sensors;
+
+  @override
+  String toString() {
+    return 'AGLoRaTrackerPoint{identifier: $identifier, latitude: $latitude, longitude: $longitude, time: $time, sensors: $sensors}';
+  }
 }
 
 var dataStreamController =

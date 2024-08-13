@@ -2,6 +2,7 @@ import 'dart:core';
 import 'dart:math';
 
 import 'package:aglora_client/aglora/data.dart';
+import 'package:aglora_client/screens/screen_map.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -197,32 +198,35 @@ class LORAtrackerTile extends StatelessWidget {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          OutlinedButton.icon(
-                            onPressed: () => Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return Container();
-                              // return MapScreen(
-                              //   centerLatitude: lat,
-                              //   centerLongitude: lon,
-                              // );
-                            })),
-                            icon: Icon(
-                              CupertinoIcons.map_pin_ellipse,
-                              color: Colors.lightGreenAccent.shade100,
-                            ),
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              side: BorderSide(color: Colors.white, width: 1),
-                            ),
-                            label: Text(
-                              'Map',
-                              style: Theme.of(context)
-                                  .primaryTextTheme
-                                  .labelLarge
-                                  ?.copyWith(color: Colors.white),
+                          Flexible(
+                            flex: 2,
+                            child: OutlinedButton.icon(
+                              onPressed: () => Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return MapScreen(
+                                  centerLatitude: lat,
+                                  centerLongitude: lon,
+                                );
+                              })),
+                              icon: Icon(
+                                CupertinoIcons.map_pin_ellipse,
+                                color: Colors.lightGreenAccent.shade100,
+                              ),
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                side: BorderSide(color: Colors.white, width: 1),
+                              ),
+                              label: Text(
+                                'Map',
+                                style: Theme.of(context)
+                                    .primaryTextTheme
+                                    .labelLarge
+                                    ?.copyWith(color: Colors.white),
+                              ),
                             ),
                           ),
                           Expanded(
+                            flex: 3,
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -231,25 +235,18 @@ class LORAtrackerTile extends StatelessWidget {
                               ],
                             ),
                           ),
-                          StreamBuilder(
-                            stream:
-                                Stream.periodic(Duration(milliseconds: 300)),
-                            builder: (context, snapshot) {
-                              return Expanded(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      _calculateTimeDifference(time),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium,
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
+                          Flexible(
+                            child: StreamBuilder(
+                              stream:
+                                  Stream.periodic(Duration(milliseconds: 300)),
+                              builder: (context, snapshot) {
+                                return Text(
+                                  _calculateTimeDifference(time),
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  maxLines: 2,
+                                );
+                              },
+                            ),
                           ),
                         ],
                       ),
