@@ -21,9 +21,17 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/../../../../flutter/cache/hosted/pub.dev/flutter_blue_plus-1.32.11/android" />
-            <option value="$PROJECT_DIR$/../../../../flutter/cache/hosted/pub.dev/flutter_compass-0.8.0/android" />
-            <option value="$PROJECT_DIR$/../../../../flutter/cache/hosted/pub.dev/geolocator_android-4.6.1/android" />
+            <option value="$PROJECT_DIR$/../../../../flutter/cache/hosted/pub.dev/connectivity_plus-6.0.3/android" />
+            <option value="$PROJECT_DIR$/../../../../flutter/cache/hosted/pub.dev/flutter_keyboard_visibility-6.0.0/android" />
+            <option value="$PROJECT_DIR$/../../../../flutter/cache/hosted/pub.dev/flutter_secure_storage-9.2.2/android" />
+            <option value="$PROJECT_DIR$/../../../../flutter/cache/hosted/pub.dev/objectbox_flutter_libs-4.0.1/android" />
+            <option value="$PROJECT_DIR$/../../../../flutter/cache/hosted/pub.dev/package_info_plus-8.0.0/android" />
+            <option value="$PROJECT_DIR$/../../../../flutter/cache/hosted/pub.dev/path_provider_android-2.2.6/android" />
+            <option value="$PROJECT_DIR$/../../../../flutter/cache/hosted/pub.dev/playx_version_update-0.0.5/android" />
+            <option value="$PROJECT_DIR$/../../../../flutter/cache/hosted/pub.dev/sentry_flutter-8.3.0/android" />
+            <option value="$PROJECT_DIR$/../../../../flutter/cache/hosted/pub.dev/shared_preferences_android-2.2.3/android" />
+            <option value="$PROJECT_DIR$/../../../../flutter/cache/hosted/pub.dev/sqflite-2.3.3+1/android" />
+            <option value="$PROJECT_DIR$/../../../../flutter/cache/hosted/pub.dev/url_launcher_android-6.3.3/android" />
             <option value="$PROJECT_DIR$/../../../../flutter/flutter/packages/flutter_tools/gradle" />
           </set>
         </option>

@@ -9,7 +9,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_blue_plus: ^1.32.11
   flutter_compass:
-    git: https://github.com/AlceoMazza/flutter_compass.git
+    git: https://github.com/helpisdev/flutter_compass.git
   geolocator: ^13.0.1
   latlong2: ^0.9.1
   flutter_map: ^7.0.2
