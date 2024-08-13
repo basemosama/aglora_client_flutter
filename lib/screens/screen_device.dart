@@ -87,14 +87,14 @@ class _DeviceScreenState extends State<DeviceScreen> {
                         onPressed: onPressed,
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.white,
-                          side: BorderSide(color: Colors.white, width: 1),
+                          side: BorderSide(color: Colors.blueAccent, width: 1),
                         ),
                         child: Text(
                           text,
                           style: Theme.of(context)
                               .primaryTextTheme
                               .labelLarge
-                              ?.copyWith(color: Colors.white),
+                              ?.copyWith(color: Colors.blueAccent),
                         )),
                     SizedBox(width: 10),
                     bluetoothStatusIcon(device: widget.device),

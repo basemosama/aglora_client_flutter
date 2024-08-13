@@ -70,14 +70,14 @@ class MapScreen extends StatelessWidget {
                     ),
                     icon: Icon(
                       Icons.turn_left_outlined,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                     label: Text(
                       'Back',
                       style: Theme.of(context)
                           .primaryTextTheme
                           .labelLarge
-                          ?.copyWith(color: Colors.white),
+                          ?.copyWith(color: Colors.black),
                     )),
                 Row(
                   children: [
