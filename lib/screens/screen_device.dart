@@ -1,3 +1,4 @@
+import 'package:aglora_client/utils/bluetooth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
@@ -7,10 +8,30 @@ import '../utils/saved_parameters.dart';
 import 'widgets/widget_lora_tracker_tile.dart';
 import 'widgets/widget_use_compass.dart';
 
-class DeviceScreen extends StatelessWidget {
+class DeviceScreen extends StatefulWidget {
   const DeviceScreen({Key? key, required this.device}) : super(key: key);
 
   final BluetoothDevice device;
+
+  @override
+  State<DeviceScreen> createState() => _DeviceScreenState();
+}
+
+class _DeviceScreenState extends State<DeviceScreen> {
+  @override
+  void initState() {
+    super.initState();
+    connectToDevice(widget.device);
+  }
+
+  Future<void> connectToDevice(BluetoothDevice device) async {
+    try {
+      await device.connect();
+      startBluetoothListener(device);
+    } catch (e) {
+      print(e);
+    }
+  }
 
   Widget _buildTrackersTiles(List<AGLORATrackerPoint> _trackersDataList) {
     return Column(
@@ -31,28 +52,28 @@ class DeviceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(device.name),
+          title: Text(widget.device.platformName),
           actions: <Widget>[
-            StreamBuilder<BluetoothDeviceState>(
-              stream: device.state,
-              initialData: BluetoothDeviceState.connecting,
+            StreamBuilder<BluetoothConnectionState>(
+              stream: widget.device.connectionState,
+              initialData: BluetoothConnectionState.connecting,
               builder: (c, snapshot) {
                 VoidCallback? onPressed;
                 String text;
                 switch (snapshot.data) {
-                  case BluetoothDeviceState.connecting:
+                  case BluetoothConnectionState.connecting:
                     text = 'waiting...';
                     break;
-                  case BluetoothDeviceState.disconnecting:
+                  case BluetoothConnectionState.disconnecting:
                     text = 'disconnecting...';
                     break;
-                  case BluetoothDeviceState.connected:
-                    onPressed = () => device.disconnect();
+                  case BluetoothConnectionState.connected:
+                    onPressed = () => widget.device.disconnect();
                     text = 'Disconnect';
-                    device.discoverServices();
+                    widget.device.discoverServices();
                     break;
-                  case BluetoothDeviceState.disconnected:
-                    onPressed = () => device.connect();
+                  case BluetoothConnectionState.disconnected:
+                    onPressed = () => widget.device.connect();
                     text = 'Connect';
                     break;
                   default:
@@ -66,17 +87,17 @@ class DeviceScreen extends StatelessWidget {
                         onPressed: onPressed,
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.white,
-                          side: BorderSide(color: Colors.white, width: 1),
+                          side: BorderSide(color: Colors.blueAccent, width: 1),
                         ),
                         child: Text(
                           text,
                           style: Theme.of(context)
                               .primaryTextTheme
                               .labelLarge
-                              ?.copyWith(color: Colors.white),
+                              ?.copyWith(color: Colors.blueAccent),
                         )),
                     SizedBox(width: 10),
-                    bluetoothStatusIcon(device: device),
+                    bluetoothStatusIcon(device: widget.device),
                     SizedBox(width: 10),
                   ],
                 );
@@ -91,6 +112,7 @@ class DeviceScreen extends StatelessWidget {
                 stream: trackersListStream,
                 initialData: [],
                 builder: (c, snapshot) {
+                  print('BLE RECIVED :${snapshot.data}');
                   return _buildTrackersTiles(snapshot.data!);
                 },
               ),
@@ -144,11 +166,11 @@ class bluetoothStatusIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<BluetoothDeviceState>(
-      stream: device.state,
-      initialData: BluetoothDeviceState.connecting,
+    return StreamBuilder<BluetoothConnectionState>(
+      stream: device.connectionState,
+      initialData: BluetoothConnectionState.connecting,
       builder: (c, snapshot) =>
-          (snapshot.data == BluetoothDeviceState.connected)
+          (snapshot.data == BluetoothConnectionState.connected)
               ? Icon(CupertinoIcons.bluetooth,
                   color: Colors.lightGreenAccent.shade100)
               : Icon(Icons.bluetooth_disabled, color: Colors.redAccent),

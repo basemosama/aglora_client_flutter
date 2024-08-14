@@ -1,0 +1,28 @@
+name: aglora_client
+version: 0.0.1+1
+publish_to: none
+description: Aglora Client.
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  cupertino_icons: ^1.0.8
+  flutter_blue_plus: ^1.32.11
+  flutter_compass:
+    git: https://github.com/helpisdev/flutter_compass.git
+  geolocator: ^13.0.1
+  latlong2: ^0.9.1
+  flutter_map: ^7.0.2
+  flutter:
+    sdk: flutter
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lint: ^2.1.2
+
+
+flutter:
+  uses-material-design: true

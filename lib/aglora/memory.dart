@@ -20,30 +20,33 @@ class Memory {
     bool isPointNew = true;
     if (newPoint != null) {
       // save point to memory if it doesn't exist
-      memory.forEach((point) {
-        final isSameNames = (point.identifier == newPoint.identifier);
-        final isSameCoords = (point.latitude == newPoint.latitude) &&
-            (point.longitude == newPoint.longitude);
-        final isSameTimes = (point.time == newPoint.time);
+      final pointsToBeRemoved = <int>[];
+      for (int i = 0; i < memory.length; i++) {
+        final point = memory[i];
 
         // The most reliable way  :-)
-        if (isSameNames && isSameCoords && isSameTimes) {
+        if (point == newPoint) {
           if (kDebugMode) print('MEMORY: Point already exists');
           isPointNew = false;
+          pointsToBeRemoved.add(i);
         }
-      });
+      }
 
-      if (isPointNew) {
-        memory.add(newPoint);
-
-        if (kDebugMode) {
-          print('MEMORY: Point has been added. '
-              'Total ${memory.length} points');
-          print('Name: ${newPoint.identifier}');
-          newPoint.sensors?.forEach((sensor) {
-            print('${sensor.name}: ${sensor.value}');
-          });
+      if (!isPointNew) {
+        for (int i = pointsToBeRemoved.length - 1; i >= 0; i--) {
+          memory.removeAt(pointsToBeRemoved[i]);
         }
+      }
+
+      memory.add(newPoint);
+
+      if (kDebugMode) {
+        print('MEMORY: Point has been added. '
+            'Total ${memory.length} points');
+        print('Name: ${newPoint.identifier}');
+        newPoint.sensors?.forEach((sensor) {
+          print('${sensor.name}: ${sensor.value}');
+        });
       }
     }
 
